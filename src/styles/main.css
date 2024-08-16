@@ -70,6 +70,13 @@ main {
     color: var(--default);
 }
 
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -82,6 +89,9 @@ main {
     color: var(--gray);
     cursor: pointer;
 }
+.navigation {
+    position: relative;
+}
 
 .navigation-toggler {
     color: var(--gray);
@@ -89,13 +99,19 @@ main {
     background: transparent;
     border: none;
     outline: none;
+    padding: 5px;
 }
 
 .dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 14px;
+    width: 40vw;
+    max-width: 150px;
     background-color: var(--background);
     border-radius: 6px;
     border: 1px solid var(--gray);
@@ -103,11 +119,21 @@ main {
     box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
 }
 
+.icon {
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .icon {
+        font-size: 20px;
+    }
+}
+
+
+
 .dropdown-item {
-    font-size: 20px;
-    line-height: 20px;
     color: var(--default);
-    letter-spacing: 5%;
+    width: 100%;
 }
 
 .dropdown-item:focus {
@@ -118,8 +144,11 @@ main {
     text-decoration: none;
     outline: none;
     border: none;
+    font-size: 16px;
     color: inherit;
 }
+
+
 
 /** about **/
 
@@ -130,7 +159,7 @@ main {
     align-items: center;
 }
 
-h1 {
+#about h1 {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -168,12 +197,12 @@ h1 span:nth-child(3) {
         margin-top: 80px;
     }
 
-    h1 {
+    #about h1 {
         font-size: 28px;
         line-height: 28px;
     }
 
-    h1 span:nth-child(3) {
+    #about h1 span:nth-child(3) {
         font-size: 28px;
         line-height: 28px;
     }
@@ -234,6 +263,12 @@ section#skills {
     overflow: scroll;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.skills-content::-webkit-scrollbar {
+    display: none;
 }
 
 .skill {
@@ -241,8 +276,8 @@ section#skills {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 224px;
-    height: 224px;
+    min-width: 224px;
+    min-height: 224px;
     padding: 30px 0 0 0;
     gap: 20px;
     border-radius: 6px;
@@ -256,6 +291,8 @@ section#skills {
     line-height: 20px;
     letter-spacing: 0.03em;
     color: var(--default);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 /** Projects **/
@@ -593,4 +630,4 @@ footer>div:last-child a {
 .cursor {
     font-weight: 100;
     color: var(--primary);
-  }
+}

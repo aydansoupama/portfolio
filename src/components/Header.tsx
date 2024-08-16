@@ -1,10 +1,7 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { LuMenu, LuMoon, LuSun } from 'react-icons/lu';
 
 const Header = () => {
-
-
     return (
         <header className="header">
             <h3 className="header-title">Aydan Soupama</h3>
@@ -29,55 +26,72 @@ const ThemeToggler = () => {
 
     return (
         <button className="theme-toggler" onClick={toggleTheme}>
-            {isDarkMode ? <LuSun size={24} /> : <LuMoon size={24} />}
+            {isDarkMode ? <LuSun className="icon" /> : <LuMoon className="icon" />}
         </button>
     );
 }
 
 
 const Navigation = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
         e.preventDefault();
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-            const yOffset = -80; 
+            const yOffset = -80;
             const y = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
-            window.scrollTo({top: y, behavior: 'smooth'});
+            window.scrollTo({ top: y, behavior: 'smooth' });
         }
+        setIsOpen(false);
     };
 
-    return (
-        <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
-                <button className="navigation-toggler" aria-label="Menu de navigation">
-                    <LuMenu size={24} />
-                </button>
-            </DropdownMenu.Trigger>
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
 
-            <DropdownMenu.Content
-                className="dropdown-content"
-                sideOffset={5}
-                align="end"
-                alignOffset={0}
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <div className="navigation" ref={dropdownRef}>
+            <button
+                className="navigation-toggler"
+                aria-label="Menu de navigation"
+                onClick={() => setIsOpen(!isOpen)}
             >
-                <DropdownMenu.Item className="dropdown-item">
-                    <a href="#home"onClick={(e) => handleClick(e, 'home')}>Home</a>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item className="dropdown-item">
-                    <a href="#about" onClick={(e) => handleClick(e, 'about')}>About me</a>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item className="dropdown-item">
-                    <a href="#skills" onClick={(e) => handleClick(e, 'skills')}>My skills</a>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item className="dropdown-item">
-                    <a href="#projects" onClick={(e) => handleClick(e, 'projects')}>My latest projects</a>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item className="dropdown-item">
-                    <a href="#contact" onClick={(e) => handleClick(e, 'contact')}>Contact me</a>
-                </DropdownMenu.Item>
-            </DropdownMenu.Content>
-        </DropdownMenu.Root>
-    )
-}
+                <LuMenu className="icon" />
+            </button>
+
+            {isOpen && (
+                <div className="dropdown-content">
+                    <div className="dropdown-item">
+                        <a href="#home" onClick={(e) => handleClick(e, 'home')}>Home</a>
+                    </div>
+                    <div className="dropdown-item">
+                        <a href="#about" onClick={(e) => handleClick(e, 'about')}>About me</a>
+                    </div>
+                    <div className="dropdown-item">
+                        <a href="#skills" onClick={(e) => handleClick(e, 'skills')}>My skills</a>
+                    </div>
+                    <div className="dropdown-item">
+                        <a href="#projects" onClick={(e) => handleClick(e, 'projects')}>Latest projects</a>
+                    </div>
+                    <div className="dropdown-item">
+                        <a href="#contact" onClick={(e) => handleClick(e, 'contact')}>Contact</a>
+                    </div>
+                </div>
+
+            )}
+        </div>
+    );
+};
 
 export default Header;

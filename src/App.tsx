@@ -17,10 +17,10 @@ const applyScrollAppear = (element: HTMLElement) => {
     {
       opacity: 1,
       y: 0,
-      duration: 1,
+      duration: 0.25,
       scrollTrigger: {
         trigger: element,
-        start: "top 60%",
+        start: "top 80%",
         end: "bottom 20%",
         toggleActions: "play none none reverse"
       }
@@ -100,8 +100,26 @@ const About = () => {
 }
 
 const Skills = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const skillsContentRef = useRef<HTMLDivElement>(null);
+  const skills = [
+    { icon: <SiHtml5 size={100} color='#ce4822' />, name: "HTML" },
+    { icon: <SiCss3 size={100} color="#1b73ba" />, name: "CSS" },
+    { icon: <SiTailwindcss size={100} color="#38bdf8" />, name: "TailwindCSS" },
+    { icon: <SiJavascript size={100} color="#f0db4f" />, name: "JavaScript" },
+    { icon: <SiTypescript size={100} color="#007acc" />, name: "TypeScript" },
+    { icon: <SiPhp size={100} color="#777bb4" />, name: "PHP" },
+    { icon: <SiNextdotjs size={100} color="#000" />, name: "Next.js" },
+    { icon: <SiReact size={100} color="#61dafb" />, name: "React" },
+    { icon: <SiNuxtdotjs size={100} color="#00c58e" />, name: "Nuxt.js" },
+    { icon: <SiVuedotjs size={100} color="#4fc08d" />, name: "Vue.js" },
+    { icon: <SiLaravel size={100} color="#ff2d20" />, name: "Laravel" },
+    { icon: <SiSymfony size={100} color="#000000" />, name: "Symfony" },
+    { icon: <SiAdonisjs size={100} color="#5843eb" />, name: "Adonis.js" },
+    { icon: <TbBrandReactNative size={100} color="#61dafb" />, name: "React Native" },
+    { icon: <SiSupabase size={100} color="#287150" />, name: "Supabase" },
+    { icon: <SiPrisma size={100} color="#2d3748" />, name: "Prisma" },
+  ];
+
+  const [startIndex, setStartIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -111,17 +129,16 @@ const Skills = () => {
   }, []);
 
   const scroll = (direction: 'left' | 'right') => {
-    const container = skillsContentRef.current;
-    if (container) {
-      const scrollAmount = 200;
-      const newPosition = direction === 'left'
-        ? Math.max(scrollPosition - scrollAmount, 0)
-        : Math.min(scrollPosition + scrollAmount, container.scrollWidth - container.clientWidth);
-
-      container.scrollTo({ left: newPosition, behavior: 'smooth' });
-      setScrollPosition(newPosition);
-    }
+    setStartIndex(prevIndex => {
+      if (direction === 'left') {
+        return prevIndex === 0 ? skills.length - 1 : prevIndex - 1;
+      } else {
+        return (prevIndex + 1) % skills.length;
+      }
+    });
   };
+
+  const visibleSkills = [...skills.slice(startIndex), ...skills.slice(0, startIndex)].slice(0, 16);
 
   return (
     <section id="skills" ref={sectionRef}>
@@ -132,27 +149,15 @@ const Skills = () => {
           <button className="next" onClick={() => scroll('right')}><LuChevronRight size={24} /></button>
         </div>
       </div>
-      <div className="skills-content" ref={skillsContentRef}>
-        <Skill icon={<SiHtml5 size={100} color='#ce4822' />} name="HTML" />
-        <Skill icon={<SiCss3 size={100} color="#1b73ba" />} name="CSS" />
-        <Skill icon={<SiTailwindcss size={100} color="#38bdf8" />} name="TailwindCSS" />
-        <Skill icon={<SiJavascript size={100} color="#f0db4f" />} name="JavaScript" />
-        <Skill icon={<SiTypescript size={100} color="#007acc" />} name="TypeScript" />
-        <Skill icon={<SiPhp size={100} color="#777bb4" />} name="PHP" />
-        <Skill icon={<SiNextdotjs size={100} color="#000" />} name="Next.js" />
-        <Skill icon={<SiReact size={100} color="#61dafb" />} name="React" />
-        <Skill icon={<SiNuxtdotjs size={100} color="#00c58e" />} name="Nuxt.js" />
-        <Skill icon={<SiVuedotjs size={100} color="#4fc08d" />} name="Vue.js" />
-        <Skill icon={<SiLaravel size={100} color="#ff2d20" />} name="Laravel" />
-        <Skill icon={<SiSymfony size={100} color="#000000" />} name="Symfony" />
-        <Skill icon={<SiAdonisjs size={100} color="#5843eb" />} name="Adonis.js" />
-        <Skill icon={<TbBrandReactNative size={100} color="#61dafb" />} name="React Native" />
-        <Skill icon={<SiSupabase size={100} color="#287150" />} name="Supabase" />
-        <Skill icon={<SiPrisma size={100} color="#2d3748" />} name="Prisma" />
+      <div className="skills-content">
+        {visibleSkills.map((skill, index) => (
+          <Skill key={`${skill.name}-${index}`} icon={skill.icon} name={skill.name} />
+        ))}
       </div>
     </section>
   )
 }
+
 
 const Skill = ({ icon, name }: { icon: React.ReactNode, name: string }) => {
   return (
@@ -215,7 +220,7 @@ const Contact = () => {
       <h3 className='contact-title'>Contact me</h3>
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="8bfc0792-122c-4c54-8826-245631bd7fba" />
-        <input type="hidden" name="redirect" value="http://localhost:5173?type=mail" />
+        <input type="hidden" name="redirect" value="http://leyvei.fr?type=mail" />
 
         <div className="form-control">
           <label htmlFor="last_name">Last Name</label>
