@@ -33,6 +33,7 @@ body {
     flex-direction: column;
     gap: 100px;
     background: var(--background);
+    scroll-behavior: smooth;
 }
 
 main {
