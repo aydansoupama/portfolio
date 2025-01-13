@@ -186,6 +186,7 @@ const Projects = () => {
       </div>
       <div className="projects-content">
         <Project image='/images/stagey.png' title='Stagey' link='https://stagey.fr' />
+        <Project image='/images/bakila.png' title='Bakila' link='https://akila-website-64p9.vercel.app/' />
       </div>
     </section>
   )
