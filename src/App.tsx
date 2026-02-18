@@ -186,7 +186,7 @@ const Projects = () => {
       </div>
       <div className="projects-content">
         <Project image='/images/stagey.png' title='Stagey' link='https://stagey.fr' />
-        <Project image='/images/bakila.png' title='Bakila' link='https://akila-website-64p9.vercel.app/' />
+        <Project image='/images/bakila.png' title='Bakila' link='https://bakilart.vercel.app/' />
       </div>
     </section>
   )
@@ -221,7 +221,7 @@ const Contact = () => {
       <h3 className='contact-title'>Contact me</h3>
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="8bfc0792-122c-4c54-8826-245631bd7fba" />
-        <input type="hidden" name="redirect" value="http://leyvei.fr?type=mail" />
+        <input type="hidden" name="redirect" value="http://aydansoupama.vercel.app.fr?type=mail" />
 
         <div className="form-control">
           <label htmlFor="last_name">Last Name</label>
