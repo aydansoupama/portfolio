@@ -102,20 +102,12 @@ const About = () => {
 const Skills = () => {
   const skills = [
     { icon: <SiHtml5 size={100} color='#ce4822' />, name: "HTML" },
-    { icon: <SiCss3 size={100} color="#1b73ba" />, name: "CSS" },
     { icon: <SiTailwindcss size={100} color="#38bdf8" />, name: "TailwindCSS" },
-    { icon: <SiJavascript size={100} color="#f0db4f" />, name: "JavaScript" },
     { icon: <SiTypescript size={100} color="#007acc" />, name: "TypeScript" },
-    { icon: <SiPhp size={100} color="#777bb4" />, name: "PHP" },
     { icon: <SiNextdotjs size={100} color="#000" />, name: "Next.js" },
-    { icon: <SiReact size={100} color="#61dafb" />, name: "React" },
     { icon: <SiNuxtdotjs size={100} color="#00c58e" />, name: "Nuxt.js" },
-    { icon: <SiVuedotjs size={100} color="#4fc08d" />, name: "Vue.js" },
     { icon: <SiLaravel size={100} color="#ff2d20" />, name: "Laravel" },
     { icon: <SiSymfony size={100} color="#000000" />, name: "Symfony" },
-    { icon: <SiAdonisjs size={100} color="#5843eb" />, name: "Adonis.js" },
-    { icon: <TbBrandReactNative size={100} color="#61dafb" />, name: "React Native" },
-    { icon: <SiSupabase size={100} color="#287150" />, name: "Supabase" },
     { icon: <SiPrisma size={100} color="#2d3748" />, name: "Prisma" },
   ];
 
