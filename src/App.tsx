@@ -1,7 +1,7 @@
 import './styles/main.css'
 import Header from './components/Header'
 import { LuChevronLeft, LuChevronRight, LuExternalLink } from 'react-icons/lu'
-import { SiHtml5, SiLaravel, SiNextdotjs, SiNuxtdotjs, SiPrisma, SiSymfony, SiTailwindcss, SiTypescript } from 'react-icons/si'
+import { SiHtml5, SiLaravel, SiNextdotjs, SiPrisma, SiSymfony, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import { useEffect, useRef, useState } from 'react'
 import Footer from './components/Footer'
 import Modal from './components/Modal'
@@ -104,7 +104,6 @@ const Skills = () => {
     { icon: <SiTailwindcss size={100} color="#38bdf8" />, name: "TailwindCSS" },
     { icon: <SiTypescript size={100} color="#007acc" />, name: "TypeScript" },
     { icon: <SiNextdotjs size={100} color="#000" />, name: "Next.js" },
-    { icon: <SiNuxtdotjs size={100} color="#00c58e" />, name: "Nuxt.js" },
     { icon: <SiLaravel size={100} color="#ff2d20" />, name: "Laravel" },
     { icon: <SiSymfony size={100} color="#000000" />, name: "Symfony" },
     { icon: <SiPrisma size={100} color="#2d3748" />, name: "Prisma" },
@@ -209,36 +208,31 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={sectionRef}>
-      <h3 className='contact-title'>Contact me</h3>
-      <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="8bfc0792-122c-4c54-8826-245631bd7fba" />
-        <input type="hidden" name="redirect" value="http://aydansoupama.vercel.app.fr?type=mail" />
+      <h3 className="contact-title">Work with me</h3>
 
-        <div className="form-control">
-          <label htmlFor="last_name">Last Name</label>
-          <input type="text" id="last_name" placeholder="Doe" name="last_name" required />
-        </div>
+      <div className="contact-content">
+        <p>
+          For project inquiries, collaborations, or custom development
+          requests, please visit{" "}
+          <a
+            href="https://leyvei.dev#contact"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            leyvei.dev
+          </a>
+        </p>
 
-        <div className="form-control">
-          <label htmlFor="first_name">First Name</label>
-          <input type="text" id="first_name" placeholder="John" name="first_name" required />
-        </div>
-        <div className="form-control">
-          <label htmlFor="email">E-mail address</label>
-          <input type="email" id="email" placeholder="john.doe@example.com" name="email" required />
-        </div>
-        <div className="form-control">
-          <label htmlFor="phone">Phone number</label>
-          <input type="tel" id="phone" placeholder="+33 6 00 00 00 00" name="phone" required />
-        </div>
-        <div className="form-control">
-          <label htmlFor="message">Message</label>
-          <textarea id="message" placeholder="Hello, I'm interested in your services." name="message" required />
-        </div>
-        <button type="submit">Send</button>
-      </form>
+        <a
+          href="https://leyvei.dev#contact"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-button"
+        >
+          Make a request
+        </a>
+      </div>
     </section>
-  )
-}
-
+  );
+};
 export default App
